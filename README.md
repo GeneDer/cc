@@ -3,6 +3,9 @@ Insight Data Engineering - Coding Challenge
 
 For this coding challenge, you will develop tools that could help analyze the community of Twitter users.  For simplicity, the features we will build are primitive, but you could easily build more complicated features on top of these.   
 
+## Note
+My solution is written in Python 2.7.6.
+
 ## Challenge Summary
 
 This challenge is to implement two features:
