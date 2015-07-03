@@ -12,25 +12,28 @@ with open(inputFile,'r') as i:
 
 
 uniqueWordCountArray=[]
+medianArray=[]
+medianIndex=0
 for line in lines:
     words = line.split()
-    uniqueWordCountArray.append(len(list(set(words)))) 
-##    for word in words:
-##        if maxLetter<len(word):
-##            maxLetter=len(word)
-##        if word in wordCount:
-##            wordCount[word]=wordCount[word]+1
-##            if maxNumber<wordCount[word]:
-##                maxNumber=wordCount[word]
-##        else:
-##            wordCount[word]=1
-##maxNumberDigit=int(math.ceil((math.log10(maxNumber))))
-##
-##outputFile=sys.argv[2]
-##with open(outputFile,'w') as o:
-##    for word in sorted(wordCount):
-##        resultingString = '{0:%s}      {1:%sd}'%(maxLetter,maxNumberDigit)
-##        o.write(resultingString.format(word, wordCount[word]))
-##        o.write('\n')
-
-print uniqueWordCountArray
+    uniqueWordCount=len(list(set(words)))
+    uniqueWordCountArray.append(uniqueWordCount)
+    for index, wordCount in enumerate(uniqueWordCountArray):
+        if wordCount>uniqueWordCount:
+            uniqueWordCountArray.insert(index,uniqueWordCount)
+            uniqueWordCount.pop(len(uniqueWordCount)-1)
+    
+    if len(uniqueWordCountArray)%2==0:
+        median=0.5*(uniqueWordCountArray[medianIndex]+uniqueWordCountArray[medianIndex+1])
+    elif len(uniqueWordCountArray)!=1:
+        medianIndex=medianIndex+1
+        median=uniqueWordCountArray[medianIndex]
+    else:
+        median=uniqueWordCount
+    medianArray.append(median)
+        
+outputFile=sys.argv[2]
+with open(outputFile,'w') as o:
+    for median in sorted(medianArray):
+        o.write(str(median))
+        o.write('\n')
